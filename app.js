@@ -1,6 +1,6 @@
 let player = 'X';
 let gameOver = true;
-let cels = {};
+let cels = {len: 0};
 let score = {X: 0, O: 0};
 
 $('#btn').click(() => {
@@ -8,7 +8,7 @@ $('#btn').click(() => {
     gameOver = false;
     $('#btn').text('Game in Progress');
     $('.cel').text('');
-    cels = {};
+    cels = {len: 0};
     displayPlayer();
   }
 });
@@ -17,6 +17,7 @@ $('.cel').click(function() {
   if(!gameOver){
     id = $(this).attr("id");
     if(!cels[id]){
+      cels.len++;
       $(this).text(player);
       cels[id] = player;
       gameOver = didWin();
@@ -25,8 +26,14 @@ $('.cel').click(function() {
         score[player] += 1;
         resetGame();
       } else {
-        changePlayer();
-        displayPlayer();
+        if(cels.len === 9){
+          gameOver = true;
+          $('#msg').text('It is a Draw!!!');
+          resetGame();
+        } else {
+          changePlayer();
+          displayPlayer();
+        }
       }
     }
   }
