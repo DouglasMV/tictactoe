@@ -50,19 +50,13 @@ h1 {
   font-size: 20px;
 }
 
-#btn{
+#btn, #reset-score{
   width: 200px;
 }
 
-.start:hover {
+.clickable:hover{
   background-color: black;
   color: white;
-}
-
-.progress {
-  background-color: transparent;
-  color: gray;
-  cursor: not-allowed;
 }
 
 .opt {  
@@ -77,24 +71,30 @@ h1 {
   width: 33.33%;
 }
 
-.opt, .start, .difficult {
+.opt, .clickable, .difficult {
   background-color: transparent;
   color: black;
   cursor: pointer;
 }
 
-.opt, #btn, .difficult {
+.opt, #btn, .difficult, #reset-score {
   box-sizing: border-box;
   border: 1px solid black;  
+}
+
+button {
+  font-size: 18px;
+  padding: 2px;
+}
+
+.progress {
+  background-color: transparent;
+  color: gray;
+  cursor: not-allowed;
 }
 
 .opt-selected {
   background-color: black;
   color: white;
   cursor: default;
-}
-
-button {
-  font-size: 18px;
-  padding: 2px;
 }

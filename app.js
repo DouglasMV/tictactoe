@@ -6,12 +6,12 @@ let vsComputer = true;
 let diff = 'easy';
 
 //handle start/game in progres/another round button
-$('#btn').click(() => {
+$('#btn').click(function() {
   if(gameOver){ //only do something if the game is not in progress
     gameOver = false;
     $('#btn').text('Game in Progress');
-    $('#btn').removeClass('start');
-    $('#btn').addClass('progress');
+    $('button').removeClass('clickable');
+    $('button').addClass('progress');
     $('.cel').text('');
     cels = {len: 0};
     displayPlayer();
@@ -21,7 +21,7 @@ $('#btn').click(() => {
 //handle the clicks on the cels
 $('.cel').click(function() {
   if(!gameOver){//only do something if the game is in progress
-    id = $(this).attr("id");
+    let id = $(this).attr("id");
     if(!cels[id]){
       cels.len++;
       $(this).text(player);
@@ -53,7 +53,7 @@ const changePlayer = () => {
 //change the display msg to show the current player
 const displayPlayer = () => {
   $('#msg').text('Player ' + player + ' turn!');
-  if(player = 'O' && vsComputer) {
+  if(player === 'O' && vsComputer) {
     computerPlays();
   }
 }
@@ -82,21 +82,50 @@ const win = (x, y, z) => {
 //resets the board and updates the score msg;
 const resetGame = () => {
   $('#btn').text('Another Round');
-  $('#btn').removeClass('progress');
-  $('#btn').addClass('start');
-  $('#scores').text('X: ' + score.X + ' --- O: ' + score.O);
+  $('button').removeClass('progress');
+  $('button').addClass('clickable');
+  $('#scores').text('X: ' + score.X + ' vs O: ' + score.O);
   changePlayer();
 }
 
 //change PvC and PvP
-$('.opt').click(() => {
-
+$('.opt').click(function() {
+  if(!gameOver) {
+    return;
+  }
+  $('.opt').removeClass('opt-selected');
+  $(this).addClass('opt-selected');
+  resetScore(true);
+  $(this).attr('id') === 'pvc' ? vsComputer = true : vsComputer = false;
 });
 
 //change Difficult
-$('.difficult').click(() => {
-
+$('.difficult').click(function() {
+  if(!gameOver) {
+    return;
+  }
+  diff = $(this).attr('id');
+  $('.difficult').removeClass('opt-selected');
+  $(this).addClass('opt-selected');
 });
+
+//reset button
+$('#reset-score').click(function() {
+  resetScore(false);
+})
+
+//reset score
+const resetScore = (change) => {
+  if(change || window.confirm("Are you sure you want to reset the score?")){
+    score.X = 0;
+    score.O = 0;
+    $('#scores').text('X: ' + score.X + ' --- O: ' + score.O);
+    player = 'X';
+    $('.cel').text('');
+    $('#btn').text('Start Game');
+    $('#msg').text('Click Below to Start');
+  }
+}
 
 //computer makes a move on the board
 const computerPlays = () => {

@@ -25,15 +25,18 @@
       
       <p id="msg">Click Below to Start</p>
       <p id="scores">X: 0 vs O: 0</p>
-      <button class="start" id="btn">Start Game</button>
+      <button class="clickable" id="btn">Start Game</button>
 
       <div class="options">
-        <button id="pvc" class="opt-selected opt">P vs C</button><button id="pvp" class="opt">P vs P</button>
+        <button id="pvc" class="opt-selected opt clickable">P vs C</button><button id="pvp" class="opt clickable">P vs P</button>
       </div>
 
       <div class="options">
-          <button id="easy" class="opt-selected difficult">Easy</button><button id="normal" class="difficult">Normal</button><button id="hard" class="difficult">Hard</button>
+          <button id="easy" class="opt-selected difficult clickable">Easy</button><button id="normal" class="difficult clickable">Normal</button><button id="hard" class="difficult clickable">Hard</button>
       </div>
+
+      <button class="clickable" id="reset-score">Reset Score</button>
+      
   </main>
 
   <script src="jquery-3.3.1.min.js"></script>
