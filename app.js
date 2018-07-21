@@ -14,7 +14,7 @@ $('#btn').click(function() {
     $('button').addClass('progress');
     $('.cel').text('');
     cels = {len: 0};
-    displayPlayer();
+    changePlayer();
   }
 });
 
@@ -38,7 +38,6 @@ $('.cel').click(function() {
           resetGame();
         } else {
           changePlayer();
-          displayPlayer();
         }
       }
     }
@@ -47,13 +46,11 @@ $('.cel').click(function() {
 
 //change players turn
 const changePlayer = () => {
-  player === 'X' ? player = 'O' : player = 'X';
-}
-
-//change the display msg to show the current player
-const displayPlayer = () => {
-  $('#msg').text('Player ' + player + ' turn!');
-  if(player === 'O' && vsComputer) {
+  if(!gameOver){
+    player === 'X' ? player = 'O' : player = 'X';
+    $('#msg').text('Player ' + player + ' turn!');
+  }
+  if(player === 'O' && vsComputer && !gameOver) {
     computerPlays();
   }
 }
@@ -86,6 +83,7 @@ const resetGame = () => {
   $('button').addClass('clickable');
   $('#scores').text('X: ' + score.X + ' vs O: ' + score.O);
   changePlayer();
+  //$('#msg').text('Click below to start another round!');
 }
 
 //change PvC and PvP
@@ -129,5 +127,43 @@ const resetScore = (change) => {
 
 //computer makes a move on the board
 const computerPlays = () => {
+  switch(diff) {
+    case 'easy':
+      easyPlay();
+      break;
+    case 'normal':
+      normalPlay();
+      break;
+    case 'hard':
+      hardPlay();
+      break;
+    default:
+      break;
+  }
+}
 
+const easyPlay = () => {
+  let arrCels = ['cel1', 'cel2', 'cel3', 'cel4', 'cel5', 'cel6', 'cel7', 'cel8', 'cel9'];
+  let chosenCel = arrCels[Math.round(8*Math.random())];
+  if(!cels[chosenCel]){
+    cels.len++;
+    $('#' + chosenCel).text('O');
+      cels[chosenCel] = 'O';
+      gameOver = didWin();
+      if(gameOver){
+        $('#msg').text('Computer won the game!!!');
+        score.O += 1;
+        resetGame();
+      } else {
+        if(cels.len === 9){
+          gameOver = true;
+          $('#msg').text('It is a Draw!!!');
+          resetGame();
+        } else {
+          changePlayer();
+        }
+      }
+    } else{
+      easyPlay();
+    }
 }
