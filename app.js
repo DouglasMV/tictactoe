@@ -4,7 +4,7 @@ let cels = new Array(9);
 let movesPlayed = 0;
 let score = {X: 0, O: 0};
 let vsComputer = true;
-let computerDifficult = 'easy';
+let computerDifficult = 'hard';
 
 //handle start/game in progres/another round button
 $('#btn').click(function() {
