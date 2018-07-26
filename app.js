@@ -86,6 +86,7 @@ $('.difficult').click(function() {
     computerDifficult = $(this).attr('id');
     $('.difficult').removeClass('opt-selected');
     $(this).addClass('opt-selected');
+    resetScore();
   }
 });
 
