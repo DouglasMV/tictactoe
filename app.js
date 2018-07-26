@@ -251,7 +251,7 @@ const hard8 = () => {
 }
 
 /* ================================================= */
-//1, 3, 4, 7 means the Computer started playing
+//1, 3, 4, 7 means the Player started playing
 
 const hard1 = () => {
   if( cels[4] === 'X'){
@@ -265,26 +265,63 @@ const hard3 = () => {
   if(canWin('X')) return;
   if(cels[4] === 'X'){
     play(1);
+  } else if(cels[0] === 'X'){//if player did NOT started in the center
+    if(cels[7] === 'X'){
+      play(3);
+    } else {
+      play(1);
+    }
+  } else if(cels[1] === 'X'){
+    if(cels[8] === 'X'){
+      play(2);
+    } else {
+      play(0);
+    }
+  } else if(cels[2] === 'X'){
+    if(cels[7] === 'X'){
+      play(3);
+    } else {
+      play(1);
+    }
+  } else if(cels[3] === 'X'){
+    if(cels[7] === 'X'){
+      play(6);
+    } else {
+      play(7);
+    }
+  } else if(cels[5] === 'X'){
+    if(cels[6] === 'X'){
+      play(7);
+    } else {
+      play(8);
+    }
   }
 }
 
 const hard5 = () => {
   if(canWin('O') || canWin('X')) return;
-  if(cels[4] === 'X' && cels[1] === 'X' && cels[8] === 'X'){
-    play(6);
-  } else if(cels[4] === 'X' && cels[3] === 'X' && cels[8] === 'X'){
+  if(cels[4] === 'X' && cels[8] === 'X'){
+    if(cels[1] === 'X'){
+      play(6);
+    } else if(cels[3] === 'X'){
+      play(2);
+    }
+  } else if(cels[3] === 'O'){//if player did NOT started in the center
     play(2);
+  } else if(cels[1] === 'O' && cels[3] === 'X'){
+    play(8);
+  } else if(!cels[3] && !cels[5]){
+    play(5);
+  } else if(!cels[0]){
+    play(0);
+  } else {
+    play(6);
   }
 }
 
 const hard7 = () => {
   if(canWin('O') || canWin('X')) return;
-
-  if(){
-
-  } else {
-    hard8();
-  }
+  hard8();
 }
 
 /* ================================================= */
