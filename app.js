@@ -265,7 +265,7 @@ const hard1 = () => {
 const hard3 = () => {
   if(canWin('X')) return;
   if(cels[4] === 'X'){
-    play(1);
+    play(2);
   } else if(cels[0] === 'X'){//if player did NOT started in the center
     if(cels[7] === 'X'){
       play(3);
